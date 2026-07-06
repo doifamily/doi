@@ -1,0 +1,26 @@
+{
+  "name": "doi Portal de Soporte",
+  "short_name": "doi Soporte",
+  "description": "Portal interactivo de guías, tutoriales y soporte para productos doi",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#fa4615",
+  "background_color": "#fa4615",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "assets/images/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

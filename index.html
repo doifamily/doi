@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portal de soporte interactivo de doi — Configura y aprende sobre los productos de estabilización y posicionamiento.">
+  <title>doi — Portal de Soporte</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="assets/images/icons/favicon.ico" type="image/x-icon">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#fa4615">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="doi Soporte">
+  <link rel="apple-touch-icon" href="assets/images/icons/icon-192.png">
+</head>
+<body>
+
+  <!-- ========================================
+       VIEW 1 — CATEGORY SELECTOR (HOME)
+       ======================================== -->
+  <section id="view-home" class="view-wrapper">
+
+    <header class="header-full">
+      <nav class="header-full__social" aria-label="Redes sociales">
+        <a href="https://www.instagram.com/doifamily_chile/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2m-.25 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9m10.16 1.13a1.12 1.12 0 1 1 0 2.25 1.12 1.12 0 0 1 0-2.25M12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10m0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6"/></svg>
+        </a>
+        <a href="https://www.facebook.com/DoiFamilyOficial" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/company/doi-family/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77Z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@DOI_family" target="_blank" rel="noopener" aria-label="YouTube">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73Z"/></svg>
+        </a>
+      </nav>
+
+      <div class="header-full__logo">
+        <img src="assets/images/logo-doi.png" alt="doi logo" onerror="this.parentElement.innerHTML='<span style=&quot;font-size:3rem;font-weight:900;color:#fff&quot;>doi</span>'">
+      </div>
+
+      <div class="search-bar">
+        <svg class="search-bar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        <span class="search-bar__label">BUSCA TU PRODUCTO</span>
+        <input type="text" class="search-bar__input" id="search-input" placeholder="Nombre, código o categoría..." aria-label="Buscar producto" autocomplete="off">
+        <button class="search-bar__clear hidden" id="search-clear-btn" type="button" aria-label="Limpiar búsqueda">&times;</button>
+        <button class="search-bar__qr" id="btn-qr-scanner" type="button" aria-label="Escanear código QR">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <nav class="breadcrumb" id="breadcrumb-home" aria-label="Navegación">
+      <span class="breadcrumb__item breadcrumb__item--active">Inicio</span>
+    </nav>
+
+    <div class="section-title-bar">
+      <h2>Selecciona el sistema que deseas aprender a configurar</h2>
+    </div>
+
+    <div class="view-main category-grid">
+      <!-- Estabilización -->
+      <article class="category-card">
+        <div class="category-card__image">
+          <img src="assets/images/icons/cat-estabilizacion.png" alt="Estabilización" onerror="this.style.display='none'">
+        </div>
+        <h3 class="category-card__title">Estabilización</h3>
+        <button class="btn-pill btn-pill--active" id="btn-ver-categoria" data-category="estabilizacion">VER CATEGORÍA</button>
+      </article>
+
+      <!-- Silla -->
+      <article class="category-card">
+        <div class="category-card__image">
+          <img src="assets/images/icons/cat-silla.png" alt="Silla" onerror="this.style.display='none'">
+        </div>
+        <h3 class="category-card__title">Silla</h3>
+        <button class="btn-pill btn-pill--disabled" disabled>PRONTO</button>
+      </article>
+
+      <!-- Bañarse -->
+      <article class="category-card">
+        <div class="category-card__image">
+          <img src="assets/images/icons/cat-banarse.png" alt="Bañarse" onerror="this.style.display='none'">
+        </div>
+        <h3 class="category-card__title">Bañarse</h3>
+        <button class="btn-pill btn-pill--disabled" disabled>PRONTO</button>
+      </article>
+
+      <!-- Caminar -->
+      <article class="category-card">
+        <div class="category-card__image">
+          <img src="assets/images/icons/cat-caminar.png" alt="Caminar" onerror="this.style.display='none'">
+        </div>
+        <h3 class="category-card__title">Caminar</h3>
+        <button class="btn-pill btn-pill--disabled" disabled>PRONTO</button>
+      </article>
+
+      <!-- Mesas -->
+      <article class="category-card">
+        <div class="category-card__image">
+          <img src="assets/images/icons/cat-mesas.png" alt="Mesas" onerror="this.style.display='none'">
+        </div>
+        <h3 class="category-card__title">Mesas</h3>
+        <button class="btn-pill btn-pill--disabled" disabled>PRONTO</button>
+      </article>
+    </div>
+
+    <footer class="footer">
+      <div class="footer__columns">
+        <div class="footer__col">
+          <h3 class="footer__col-title">Contacto</h3>
+          <div class="footer__item">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+            <span>Tegualda 1449, Providencia - Santiago, Chile.</span>
+          </div>
+          <div class="footer__item">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            <a href="mailto:info@doi.cl">info@doi.cl</a>
+          </div>
+          <div class="footer__item">
+            <svg viewBox="0 0 24 24"><path d="M17 1.01 7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg>
+            <a href="tel:+56999694935">+56 9 9969 4935</a>
+          </div>
+          <div class="footer__item">
+            <svg viewBox="0 0 24 24"><path d="M20 6H4c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 10H4V8h16v8zm-8-1h2v-2h2v-2h-2V9h-2v2H8v2h4v2z"/></svg>
+            <span>Código Postal 7501474</span>
+          </div>
+        </div>
+        <div class="footer__col">
+          <h3 class="footer__col-title">Explora</h3>
+          <div class="footer__item">
+            <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+            <a href="https://doifamily.com/politica-de-privacidad/" target="_blank" rel="noopener">Políticas de Privacidad</a>
+          </div>
+          <div class="footer__item">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z"/></svg>
+            <a href="https://doifamily.com/terminos-y-condiciones/" target="_blank" rel="noopener">Términos y Condiciones</a>
+          </div>
+        </div>
+      </div>
+      <nav class="footer__social-bar" aria-label="Redes sociales">
+        <a href="https://www.instagram.com/doifamily_chile/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2m-.25 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9m10.16 1.13a1.12 1.12 0 1 1 0 2.25 1.12 1.12 0 0 1 0-2.25M12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10m0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6"/></svg>
+        </a>
+        <a href="https://www.facebook.com/DoiFamilyOficial" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/company/doi-family/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77Z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@DOI_family" target="_blank" rel="noopener" aria-label="YouTube">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73Z"/></svg>
+        </a>
+      </nav>
+    </footer>
+
+  </section>
+
+
+  <!-- ========================================
+       VIEW 2 — PRODUCT CATALOG
+       ======================================== -->
+  <section id="view-catalog" class="hidden view-wrapper">
+
+    <header class="header-compact">
+      <button class="header-compact__back" data-action="go-home" aria-label="Volver al inicio">&larr;</button>
+      <div class="header-compact__logo">
+        <img src="assets/images/logo-doi.png" alt="doi logo" onerror="this.parentElement.innerHTML='<span style=&quot;font-size:1.6rem;font-weight:900;color:#fff&quot;>doi</span>'">
+      </div>
+      <h1 class="header-compact__title">Productos: Estabilización</h1>
+    </header>
+
+    <nav class="breadcrumb" id="breadcrumb-catalog" aria-label="Navegación">
+      <span class="breadcrumb__item"><a href="#" data-action="go-home">Inicio</a></span>
+      <span class="breadcrumb__separator">/</span>
+      <span class="breadcrumb__item breadcrumb__item--active">Estabilización</span>
+    </nav>
+
+    <div class="view-main product-grid" id="product-grid"></div>
+
+    <footer class="footer">
+      <div class="footer__columns">
+        <div class="footer__col">
+          <h3 class="footer__col-title">Contacto</h3>
+          <div class="footer__item">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+            <span>Tegualda 1449, Providencia - Santiago, Chile.</span>
+          </div>
+          <div class="footer__item">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            <a href="mailto:info@doi.cl">info@doi.cl</a>
+          </div>
+          <div class="footer__item">
+            <svg viewBox="0 0 24 24"><path d="M17 1.01 7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg>
+            <a href="tel:+56999694935">+56 9 9969 4935</a>
+          </div>
+          <div class="footer__item">
+            <svg viewBox="0 0 24 24"><path d="M20 6H4c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 10H4V8h16v8zm-8-1h2v-2h2v-2h-2V9h-2v2H8v2h4v2z"/></svg>
+            <span>Código Postal 7501474</span>
+          </div>
+        </div>
+        <div class="footer__col">
+          <h3 class="footer__col-title">Explora</h3>
+          <div class="footer__item">
+            <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+            <a href="https://doifamily.com/politica-de-privacidad/" target="_blank" rel="noopener">Políticas de Privacidad</a>
+          </div>
+          <div class="footer__item">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z"/></svg>
+            <a href="https://doifamily.com/terminos-y-condiciones/" target="_blank" rel="noopener">Términos y Condiciones</a>
+          </div>
+        </div>
+      </div>
+      <nav class="footer__social-bar" aria-label="Redes sociales">
+        <a href="https://www.instagram.com/doifamily_chile/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2m-.25 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9m10.16 1.13a1.12 1.12 0 1 1 0 2.25 1.12 1.12 0 0 1 0-2.25M12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10m0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6"/></svg>
+        </a>
+        <a href="https://www.facebook.com/DoiFamilyOficial" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/company/doi-family/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77Z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@DOI_family" target="_blank" rel="noopener" aria-label="YouTube">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73Z"/></svg>
+        </a>
+      </nav>
+    </footer>
+
+  </section>
+
+
+  <!-- ========================================
+       VIEW 3 — INTERACTIVE SUPPORT GUIDE
+       ======================================== -->
+  <section id="view-detail" class="hidden view-wrapper">
+
+    <header class="header-compact">
+      <button class="header-compact__back" data-action="go-catalog" aria-label="Volver al catálogo">&larr;</button>
+      <div class="header-compact__logo">
+        <img src="assets/images/logo-doi.png" alt="doi logo" onerror="this.parentElement.innerHTML='<span style=&quot;font-size:1.6rem;font-weight:900;color:#fff&quot;>doi</span>'">
+      </div>
+      <h1 class="header-compact__title">Guía interactiva de apoyo</h1>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Navegación">
+      <span class="breadcrumb__item"><a href="#" data-action="go-home">Inicio</a></span>
+      <span class="breadcrumb__separator">/</span>
+      <span class="breadcrumb__item"><a href="#" data-action="go-catalog">Estabilización</a></span>
+      <span class="breadcrumb__separator">/</span>
+      <span class="breadcrumb__item breadcrumb__item--active" id="breadcrumb-product">Sitting</span>
+    </nav>
+
+    <div class="view-main detail-layout">
+      <!-- Left Panel -->
+      <div class="detail-left">
+        <div class="detail-left__header">
+          <div class="detail-left__info">
+            <h2 class="detail-left__title" id="detail-title">Sitting</h2>
+            <p class="detail-left__code" id="detail-code">Código: DOI102</p>
+          </div>
+          <div class="detail-left__image">
+            <img id="detail-image" src="assets/images/products/estabilizacion/S200/main.png" alt="Sitting" onerror="this.style.display='none'">
+          </div>
+        </div>
+
+        <p class="detail-left__description" id="detail-description">
+          Diseñado para mejorar el posicionamiento en sedestación para niños y adolescentes, este asiento moldeado ofrece un control postural óptimo.
+        </p>
+
+        <div class="detail-left__photo">
+          <img id="detail-photo" src="assets/images/products/estabilizacion/S200/secondary.png" alt="Detalle del producto" onerror="this.style.display='none'">
+        </div>
+
+        <div class="detail-left__actions">
+          <a class="btn-whatsapp" id="btn-whatsapp" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+            Preguntar en chat
+          </a>
+          <a class="btn-store" id="btn-store" href="https://doifamily.com/producto/sitting-m/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.36 9l.6 3H5.04l.6-3h12.72M20 4H4v2h16V4zm0 3H4l-1 5v2h1v6h10v-6h4v6h2v-6h1v-2l-1-5zM6 18v-4h6v4H6z"/></svg>
+            VER EN TIENDA
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Panel -->
+      <div class="detail-right">
+        <h2 class="detail-right__title">¿Qué necesitas?</h2>
+
+        <div class="action-list">
+          <a class="btn-action" id="btn-tutorial" href="#" target="_blank" rel="noopener">
+            <span class="btn-action__icon">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+            VER TUTORIAL
+          </a>
+
+          <!-- Documentación agrupada por modelo -->
+          <div class="docs-group" id="docs-group">
+            <a class="btn-action" id="btn-guia-tecnica" href="docs/S200/sitting-guia-tecnica-S200.pdf" download target="_blank" rel="noopener">
+              <span class="btn-action__icon">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z"/></svg>
+              </span>
+              GUÍA TÉCNICA
+            </a>
+
+            <a class="btn-action" id="btn-guia-practica" href="docs/S200/Manual-S200.pdf" download target="_blank" rel="noopener">
+              <span class="btn-action__icon">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+              </span>
+              Manual Práctico
+            </a>
+          </div>
+
+          <button class="btn-action" id="btn-config" type="button">
+            <span class="btn-action__icon">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94a7.07 7.07 0 0 0 .06-.94c0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.49.49 0 0 0-.59-.22l-2.39.96a7.04 7.04 0 0 0-1.62-.94l-.36-2.54a.48.48 0 0 0-.48-.41h-3.84a.48.48 0 0 0-.48.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96a.48.48 0 0 0-.59.22L2.74 8.87a.48.48 0 0 0 .12.61l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.26.41.48.41h3.84c.24 0 .44-.17.48-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32a.49.49 0 0 0-.12-.61l-2.03-1.58zM12 15.6A3.6 3.6 0 1 1 12 8.4a3.6 3.6 0 0 1 0 7.2z"/></svg>
+            </span>
+            TIPOS DE CONFIGURACIÓN
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer__columns">
+        <div class="footer__col">
+          <h3 class="footer__col-title">Contacto</h3>
+          <div class="footer__item">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+            <span>Tegualda 1449, Providencia - Santiago, Chile.</span>
+          </div>
+          <div class="footer__item">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            <a href="mailto:info@doi.cl">info@doi.cl</a>
+          </div>
+          <div class="footer__item">
+            <svg viewBox="0 0 24 24"><path d="M17 1.01 7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg>
+            <a href="tel:+56999694935">+56 9 9969 4935</a>
+          </div>
+          <div class="footer__item">
+            <svg viewBox="0 0 24 24"><path d="M20 6H4c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 10H4V8h16v8zm-8-1h2v-2h2v-2h-2V9h-2v2H8v2h4v2z"/></svg>
+            <span>Código Postal 7501474</span>
+          </div>
+        </div>
+        <div class="footer__col">
+          <h3 class="footer__col-title">Explora</h3>
+          <div class="footer__item">
+            <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+            <a href="https://doifamily.com/politica-de-privacidad/" target="_blank" rel="noopener">Políticas de Privacidad</a>
+          </div>
+          <div class="footer__item">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z"/></svg>
+            <a href="https://doifamily.com/terminos-y-condiciones/" target="_blank" rel="noopener">Términos y Condiciones</a>
+          </div>
+        </div>
+      </div>
+      <nav class="footer__social-bar" aria-label="Redes sociales">
+        <a href="https://www.instagram.com/doifamily_chile/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2m-.25 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9m10.16 1.13a1.12 1.12 0 1 1 0 2.25 1.12 1.12 0 0 1 0-2.25M12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10m0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6"/></svg>
+        </a>
+        <a href="https://www.facebook.com/DoiFamilyOficial" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/company/doi-family/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77Z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@DOI_family" target="_blank" rel="noopener" aria-label="YouTube">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73Z"/></svg>
+        </a>
+      </nav>
+    </footer>
+
+  </section>
+
+
+  <!-- ========================================
+       VIEW 4 — SEARCH RESULTS
+       ======================================== -->
+  <section id="view-search" class="hidden view-wrapper">
+
+    <header class="header-compact">
+      <button class="header-compact__back" data-action="go-home" aria-label="Volver al inicio">&larr;</button>
+      <div class="header-compact__logo">
+        <img src="assets/images/logo-doi.png" alt="doi logo" onerror="this.parentElement.innerHTML='<span style=&quot;font-size:1.6rem;font-weight:900;color:#fff&quot;>doi</span>'">
+      </div>
+      <h1 class="header-compact__title">Resultados de búsqueda</h1>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Navegación">
+      <span class="breadcrumb__item"><a href="#" data-action="go-home">Inicio</a></span>
+      <span class="breadcrumb__separator">/</span>
+      <span class="breadcrumb__item breadcrumb__item--active">Búsqueda</span>
+    </nav>
+
+    <div class="view-main search-view">
+      <div class="search-view__header">
+        <p class="search-view__summary">
+          Resultados para "<strong id="search-query-label"></strong>" — <span id="search-count">0</span> producto(s)
+        </p>
+      </div>
+      <div class="product-grid" id="search-results"></div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer__columns">
+        <div class="footer__col">
+          <h3 class="footer__col-title">Contacto</h3>
+          <div class="footer__item">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+            <span>Tegualda 1449, Providencia - Santiago, Chile.</span>
+          </div>
+          <div class="footer__item">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            <a href="mailto:info@doi.cl">info@doi.cl</a>
+          </div>
+          <div class="footer__item">
+            <svg viewBox="0 0 24 24"><path d="M17 1.01 7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg>
+            <a href="tel:+56999694935">+56 9 9969 4935</a>
+          </div>
+          <div class="footer__item">
+            <svg viewBox="0 0 24 24"><path d="M20 6H4c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 10H4V8h16v8zm-8-1h2v-2h2v-2h-2V9h-2v2H8v2h4v2z"/></svg>
+            <span>Código Postal 7501474</span>
+          </div>
+        </div>
+        <div class="footer__col">
+          <h3 class="footer__col-title">Explora</h3>
+          <div class="footer__item">
+            <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+            <a href="https://doifamily.com/politica-de-privacidad/" target="_blank" rel="noopener">Políticas de Privacidad</a>
+          </div>
+          <div class="footer__item">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z"/></svg>
+            <a href="https://doifamily.com/terminos-y-condiciones/" target="_blank" rel="noopener">Términos y Condiciones</a>
+          </div>
+        </div>
+      </div>
+      <nav class="footer__social-bar" aria-label="Redes sociales">
+        <a href="https://www.instagram.com/doifamily_chile/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2m-.25 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9m10.16 1.13a1.12 1.12 0 1 1 0 2.25 1.12 1.12 0 0 1 0-2.25M12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10m0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6"/></svg>
+        </a>
+        <a href="https://www.facebook.com/DoiFamilyOficial" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/company/doi-family/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77Z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@DOI_family" target="_blank" rel="noopener" aria-label="YouTube">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73Z"/></svg>
+        </a>
+      </nav>
+    </footer>
+
+  </section>
+
+
+  <!-- ========================================
+       QR SCANNER MODAL OVERLAY
+       ======================================== -->
+  <div id="scanner-modal" class="modal-overlay hidden">
+    <div class="modal-container modal-container--scanner">
+      <button class="modal-close" id="scanner-modal-close" aria-label="Cerrar">&times;</button>
+      <h3 class="scanner__title">Escanea el código QR del producto</h3>
+      <p class="scanner__hint">Apunta la cámara al código QR de tu producto doi</p>
+      <div id="qr-reader" style="width: 100%; max-width: 500px; margin: 0 auto;"></div>
+      <div class="scanner__manual">
+        <p>¿No puedes escanear? Ingresa el código manualmente:</p>
+        <input type="text" class="scanner-desktop__input" id="manual-code-input" placeholder="Ej: S200" maxlength="10">
+        <button class="btn-pill btn-pill--active" id="manual-code-submit">BUSCAR CÓDIGO</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================
+       CONFIGURATION SELECTOR MODAL (PASO 2)
+       ======================================== -->
+  <div id="config-modal" class="modal-overlay hidden">
+    <div class="modal-container modal-container--config">
+      <button class="modal-close" id="config-modal-close" aria-label="Cerrar">&times;</button>
+      <h3 class="config-modal__title">Tipos de configuración</h3>
+      <p class="config-modal__subtitle" id="config-product-label">Sitting — S200</p>
+      <p class="config-modal__hint">Selecciona el tipo de guía visual en cámara que necesitas</p>
+
+      <div class="config-modal__cards">
+        <!-- Option 1: Full configuration -->
+        <button class="config-card" id="config-complete" type="button">
+          <div class="config-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><path d="M6.5 6.5h0M17.5 6.5h0M6.5 17.5h0M17.5 17.5h0" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <div class="config-card__body">
+            <h4 class="config-card__title">Configuración completa</h4>
+            <p class="config-card__desc">Guía paso a paso de todos los componentes del producto</p>
+          </div>
+          <span class="config-card__arrow">&rsaquo;</span>
+        </button>
+
+        <!-- Option 2: Per-piece configuration -->
+        <div class="config-card config-card--pieces" id="config-pieces">
+          <div class="config-card__header">
+            <div class="config-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3 7h7l-5.5 4.5 2 7L12 16l-6.5 4.5 2-7L2 9h7z"/></svg>
+            </div>
+            <div class="config-card__body">
+              <h4 class="config-card__title">Configuración por pieza</h4>
+              <p class="config-card__desc">Selecciona el componente específico que deseas configurar</p>
+            </div>
+          </div>
+          <div class="config-card__badges">
+            <button class="config-badge" type="button" data-piece="calzon-pelvico">Calzón pélvico</button>
+            <button class="config-badge" type="button" data-piece="cunas-tronco">Cuñas tronco</button>
+            <button class="config-badge" type="button" data-piece="cuna-cabeza">Cuña cabeza</button>
+            <button class="config-badge" type="button" data-piece="abductor">Abductor</button>
+            <button class="config-badge" type="button" data-piece="otros-apoyos">Otros apoyos</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PWA Install Banner -->
+  <!-- Android PWA Install Banner -->
+  <div id="pwa-install-banner" class="pwa-banner hidden">
+    <div class="pwa-banner__content">
+      <img class="pwa-banner__icon" src="assets/images/icons/icon-192.png" alt="doi" onerror="this.style.display='none'" width="40" height="40">
+      <div class="pwa-banner__text">
+        <strong>Instalar doi Soporte</strong>
+        <span>Accede rápido desde tu pantalla de inicio</span>
+      </div>
+      <button class="pwa-banner__install" id="pwa-install-btn">Instalar</button>
+      <button class="pwa-banner__close" id="pwa-close-btn" aria-label="Cerrar">&times;</button>
+    </div>
+  </div>
+
+  <!-- iOS Safari Install Guide -->
+  <div id="ios-install-guide" class="ios-guide hidden">
+    <button class="ios-guide__close" id="ios-guide-close" aria-label="Cerrar">&times;</button>
+    <div class="ios-guide__content">
+      <img class="ios-guide__icon" src="assets/images/icons/icon-192.png" alt="doi" onerror="this.style.display='none'" width="44" height="44">
+      <h4 class="ios-guide__title">Instalar doi Soporte</h4>
+      <div class="ios-guide__steps">
+        <p class="ios-guide__step">
+          <span class="ios-guide__num">1</span>
+          Presiona el botón de <strong>Compartir</strong>
+          <svg class="ios-guide__share-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+          en la barra de Safari.
+        </p>
+        <p class="ios-guide__step">
+          <span class="ios-guide__num">2</span>
+          Desplázate y selecciona <strong>"Agregar a la pantalla de inicio"</strong>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+
+  <!-- Service Worker Registration & PWA Install Prompt -->
+  <script>
+    (function () {
+      /* Register Service Worker */
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('./sw.js')
+            .then(function (reg) {
+              console.log('SW registrado:', reg.scope);
+            })
+            .catch(function (err) {
+              console.warn('SW registro fallido:', err);
+            });
+        });
+      }
+
+      /* Capture beforeinstallprompt */
+      var deferredPrompt = null;
+      var banner = document.getElementById('pwa-install-banner');
+      var installBtn = document.getElementById('pwa-install-btn');
+      var closeBtn = document.getElementById('pwa-close-btn');
+
+      window.addEventListener('beforeinstallprompt', function (e) {
+        e.preventDefault();
+        deferredPrompt = e;
+        if (banner) banner.classList.remove('hidden');
+      });
+
+      if (installBtn) {
+        installBtn.addEventListener('click', function () {
+          if (!deferredPrompt) return;
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then(function (result) {
+            deferredPrompt = null;
+            if (banner) banner.classList.add('hidden');
+          });
+        });
+      }
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function () {
+          if (banner) banner.classList.add('hidden');
+        });
+      }
+
+      /* Hide banner if already installed */
+      window.addEventListener('appinstalled', function () {
+        if (banner) banner.classList.add('hidden');
+        deferredPrompt = null;
+      });
+
+      /* ===== iOS Safari Install Guide ===== */
+      var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+        (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      var isStandalone = window.navigator.standalone === true ||
+        window.matchMedia('(display-mode: standalone)').matches;
+      var iosGuide = document.getElementById('ios-install-guide');
+      var iosCloseBtn = document.getElementById('ios-guide-close');
+      var iosDismissed = sessionStorage.getItem('ios-guide-dismissed');
+
+      if (isIOS && !isStandalone && !iosDismissed && iosGuide) {
+        setTimeout(function () {
+          iosGuide.classList.remove('hidden');
+        }, 1500);
+      }
+
+      if (iosCloseBtn) {
+        iosCloseBtn.addEventListener('click', function () {
+          if (iosGuide) iosGuide.classList.add('hidden');
+          sessionStorage.setItem('ios-guide-dismissed', '1');
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

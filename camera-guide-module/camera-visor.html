@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#000000" />
+  <title>Guía visual con cámara — doi</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --color-primary: #fa4615;
+      --color-step-active: #5bb8e0;
+      --color-white: #ffffff;
+      --font-stack: 'Montserrat', 'Arial', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: var(--font-stack);
+      background: #000;
+    }
+
+    /* ========================================
+       CAMERA VIDEO — FULL VIEWPORT
+       ======================================== */
+
+    #camera {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    /* ========================================
+       MÁSCARA GUÍA (ANIMACIÓN AR SUPERPUESTA)
+       ======================================== */
+
+    #guiding-mask {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: min(72vw, 320px);
+      transform: translate(-50%, -50%);
+      transform-origin: center center;
+      z-index: 2;
+      opacity: 0.72;
+      pointer-events: auto;
+      cursor: grab;
+      touch-action: none;
+      will-change: transform;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-user-drag: none;
+      transition: opacity 0.25s ease;
+    }
+
+    #guiding-mask.dragging {
+      cursor: grabbing;
+    }
+
+    #guiding-mask.switching {
+      opacity: 0;
+    }
+
+    /* ========================================
+       TOP HEADER — BACK + FLASH
+       ======================================== */
+
+    .top-nav {
+      position: fixed;
+      top: max(16px, env(safe-area-inset-top));
+      left: 16px;
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .icon-btn {
+      width: 46px;
+      height: 46px;
+      border: 1.5px solid rgba(255, 255, 255, 0.55);
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: var(--color-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.15s ease;
+    }
+
+    .icon-btn:active {
+      transform: scale(0.92);
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .icon-btn svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .icon-btn--flash-on {
+      background: var(--color-white);
+      color: #111;
+      border-color: var(--color-white);
+    }
+
+    /* ========================================
+       INSIGNIA DE PRODUCTO (MODELO + PIEZA)
+       ======================================== */
+
+    .product-badge {
+      position: fixed;
+      top: max(16px, env(safe-area-inset-top));
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 4;
+      max-width: 70vw;
+      padding: 9px 18px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: var(--color-white);
+      font-family: var(--font-stack);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ========================================
+       CAMERA SHUTTER — FLOATING ACTION CIRCLE
+       ======================================== */
+
+    .shutter {
+      position: fixed;
+      bottom: max(110px, calc(env(safe-area-inset-bottom) + 104px));
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 4;
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      border: 4px solid rgba(255, 255, 255, 0.85);
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .shutter::after {
+      content: '';
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--color-white);
+      transition: transform 0.15s ease;
+    }
+
+    .shutter:active::after {
+      transform: scale(0.85);
+    }
+
+    /* Leyenda técnica bajo el obturador */
+    .shutter-caption {
+      position: fixed;
+      bottom: max(78px, calc(env(safe-area-inset-bottom) + 72px));
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 4;
+      max-width: 62vw;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.9);
+      font-family: var(--font-stack);
+      font-size: 0.66rem;
+      font-weight: 600;
+      line-height: 1.3;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+      pointer-events: none;
+    }
+
+    /* ========================================
+       DESTELLO DE CAPTURA (FLASH DE PANTALLA)
+       ======================================== */
+
+    .screen-flash {
+      position: fixed;
+      inset: 0;
+      z-index: 9;
+      background: #ffffff;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s ease;
+    }
+
+    .screen-flash.active {
+      opacity: 0.85;
+    }
+
+    /* ========================================
+       TOAST CENTRAL DE CONFIRMACIÓN
+       ======================================== */
+
+    .center-toast {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.9);
+      z-index: 10;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--color-white);
+      font-family: var(--font-stack);
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-align: center;
+      padding: 16px 26px;
+      border-radius: 16px;
+      max-width: 80vw;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .center-toast.visible {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    /* ========================================
+       RIGHT VERTICAL STEP NAVIGATOR
+       ======================================== */
+
+    .step-nav {
+      position: fixed;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .step-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid var(--color-white);
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: var(--color-white);
+      font-family: var(--font-stack);
+      font-size: 1.15rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.25s ease, border-color 0.25s ease, transform 0.15s ease, box-shadow 0.25s ease;
+    }
+
+    .step-badge:active {
+      transform: scale(0.9);
+    }
+
+    .step-badge--active {
+      background: var(--color-step-active);
+      border-color: var(--color-white);
+      box-shadow: 0 0 0 4px rgba(91, 184, 224, 0.35);
+    }
+
+    /* ========================================
+       BOTTOM INSTRUCTION CARD — GLASS PILL
+       ======================================== */
+
+    .instruction-card {
+      position: fixed;
+      bottom: max(24px, env(safe-area-inset-bottom));
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 4;
+      width: min(92vw, 480px);
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 22px;
+      padding: 14px 22px;
+      text-align: center;
+    }
+
+    .instruction-card__subtitle {
+      display: none;
+      color: var(--color-step-active);
+      font-family: var(--font-stack);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      transition: opacity 0.2s ease;
+    }
+
+    .instruction-card__subtitle.visible {
+      display: block;
+    }
+
+    .instruction-card__subtitle.switching {
+      opacity: 0;
+    }
+
+    .instruction-card__text {
+      color: var(--color-white);
+      font-size: 0.92rem;
+      font-weight: 700;
+      line-height: 1.45;
+      transition: opacity 0.2s ease;
+    }
+
+    .instruction-card__text.switching {
+      opacity: 0;
+    }
+
+    /* ========================================
+       CAMERA ERROR STATE
+       ======================================== */
+
+    .camera-error {
+      position: fixed;
+      inset: 0;
+      z-index: 3;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.95rem;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    .camera-error.visible {
+      display: flex;
+    }
+
+    /* Landscape adjustments */
+    @media (orientation: landscape) and (max-height: 480px) {
+      .shutter {
+        bottom: auto;
+        top: 50%;
+        left: auto;
+        right: 90px;
+        transform: translateY(-50%);
+      }
+
+      .instruction-card {
+        width: min(70vw, 480px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Cámara de fondo -->
+  <video id="camera" autoplay playsinline muted></video>
+
+  <!-- Estado de error de cámara -->
+  <div class="camera-error" id="camera-error">
+    No se pudo acceder a la cámara.<br>
+    Revisa los permisos del navegador e intenta nuevamente.
+  </div>
+
+  <!-- Animación superpuesta -->
+  <img id="guiding-mask" src="animacion-abductor.gif" alt="Animación de configuración del abductor" />
+
+  <!-- Insignia de producto: Modelo + Pieza -->
+  <div class="product-badge" id="product-badge">Modelo: S200 - Abductor</div>
+
+  <!-- Navegación superior: volver + flash -->
+  <nav class="top-nav">
+    <button class="icon-btn" id="btn-back" type="button" aria-label="Volver">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><polyline points="12 19 5 12 12 5"/></svg>
+    </button>
+    <button class="icon-btn" id="btn-flash" type="button" aria-label="Activar linterna">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+    </button>
+  </nav>
+
+  <!-- Navegador vertical de pasos -->
+  <nav class="step-nav" id="step-nav" aria-label="Pasos de configuración">
+    <button class="step-badge step-badge--active" type="button" data-step="0" aria-label="Paso 1">1</button>
+    <button class="step-badge" type="button" data-step="1" aria-label="Paso 2">2</button>
+    <button class="step-badge" type="button" data-step="2" aria-label="Paso 3">3</button>
+  </nav>
+
+  <!-- Botón obturador de cámara -->
+  <button class="shutter" id="btn-shutter" type="button" aria-label="Capturar foto"></button>
+  <p class="shutter-caption">Capturar pantalla y descargar evidencia de posicionamiento (.png)</p>
+
+  <!-- Destello de captura (flash de pantalla) -->
+  <div class="screen-flash" id="screen-flash" aria-hidden="true"></div>
+
+  <!-- Toast central de confirmación -->
+  <div class="center-toast" id="center-toast" role="status" aria-live="polite"></div>
+
+  <!-- Tarjeta de instrucción inferior -->
+  <div class="instruction-card">
+    <span class="instruction-card__subtitle" id="instruction-subtitle"></span>
+    <p class="instruction-card__text" id="instruction-text">
+      Paso 1: Prepare la estructura del Sitting e identifique los anclajes del abductor.
+    </p>
+  </div>
+
+  <script>
+    (function () {
+      const videoElement = document.getElementById('camera');
+      const guidingMask = document.getElementById('guiding-mask');
+      const instructionText = document.getElementById('instruction-text');
+      const instructionSubtitle = document.getElementById('instruction-subtitle');
+      const stepNav = document.getElementById('step-nav');
+      const cameraError = document.getElementById('camera-error');
+
+      const productBadge = document.getElementById('product-badge');
+
+      /* ========================================
+         CONTEXTO DE PRODUCTO — LECTURA DEL HASH
+         Formato esperado: #S200/abductor
+         Inyección automática: sin hash → se fuerza S200/abductor
+         para probar de inmediato el flujo completo de 3 pasos.
+         ======================================== */
+
+      const DEFAULT_CONTEXT = 'S200/abductor';
+
+      function parseProductContext() {
+        let raw = (window.location.hash || '').replace(/^#\/?/, '').trim();
+        if (!raw) {
+          window.location.hash = DEFAULT_CONTEXT;
+          raw = DEFAULT_CONTEXT;
+        }
+        const parts = raw.split('/');
+        return {
+          model: (parts[0] || 'S200').toUpperCase(),
+          piece: (parts[1] || 'abductor').toLowerCase(),
+        };
+      }
+
+      /* Etiquetas de piezas en español para la insignia superior */
+      const PIECE_LABELS = {
+        abductor: 'Abductor',
+        calzon: 'Calzón pélvico',
+        'cunas-tronco': 'Cuñas tronco',
+        'cuna-cabeza': 'Cuña cabeza',
+        otros: 'Otros apoyos',
+        completa: 'Configuración completa',
+      };
+
+      /* ========================================
+         DATOS DE CONFIGURACIÓN POR PRODUCTO
+         Cada pieza mapea 3 etapas con texto en español y su gif.
+         Si un gif específico no existe, se usa animacion-abductor.gif.
+         ======================================== */
+
+      const STEPS_CONFIGURATION_DATA = {
+        S200: {
+          abductor: [
+            {
+              text: 'Paso 1: Prepare la estructura del Sitting e identifique los anclajes del abductor.',
+              asset: 'animacion-abductor-step1.gif',
+            },
+            {
+              text: 'Paso 2: Coloque el abductor entre las piernas y acérquelo suavemente hasta brindar soporte central.',
+              asset: 'animacion-abductor.gif',
+            },
+            {
+              text: 'Paso 3: Asegure el abductor y verifique que la separación de piernas quede alineada y firme.',
+              asset: 'animacion-abductor-step3.gif',
+              subtitle: 'Ajuste Simétrico',
+            },
+          ],
+          calzon: [
+            {
+              text: 'Paso 1: Ubique el calzón pélvico sobre la base del asiento, centrado con la cadera del usuario.',
+              asset: 'animacion-calzon-step1.gif',
+            },
+            {
+              text: 'Paso 2: Pase las correas por las guías laterales y ajuste sin apretar en exceso la zona pélvica.',
+              asset: 'animacion-calzon.gif',
+            },
+            {
+              text: 'Paso 3: Verifique que la pelvis quede estable y simétrica, sin deslizamiento hacia adelante.',
+              asset: 'animacion-calzon-step3.gif',
+              subtitle: 'Ajuste Simétrico',
+            },
+          ],
+          'cunas-tronco': [
+            {
+              text: 'Paso 1: Identifique la altura del tronco y posicione ambas cuñas a la altura de las costillas.',
+              asset: 'animacion-cunas-tronco-step1.gif',
+            },
+            {
+              text: 'Paso 2: Acerque las cuñas laterales de forma simétrica hasta contener el tronco sin comprimir.',
+              asset: 'animacion-cunas-tronco.gif',
+            },
+            {
+              text: 'Paso 3: Fije las cuñas y confirme que el tronco quede erguido y centrado en la línea media.',
+              asset: 'animacion-cunas-tronco-step3.gif',
+              subtitle: 'Ajuste Simétrico',
+            },
+          ],
+          'cuna-cabeza': [
+            {
+              text: 'Paso 1: Ajuste la altura del soporte de cabeza según la longitud del cuello del usuario.',
+              asset: 'animacion-cunas-cabeza.gif',
+            },
+            {
+              text: 'Paso 2: Acomode la cuña de cabeza en la zona occipital, apoyando sin forzar la posición.',
+              asset: 'animacion-cunas-cabeza.gif',
+            },
+            {
+              text: 'Paso 3: Verifique que la cabeza quede alineada con el tronco y la mirada al frente.',
+              asset: 'animacion-cunas-cabeza.gif',
+              subtitle: 'Ajuste Diferenciado',
+            },
+          ],
+          otros: [
+            {
+              text: 'Paso 1: Seleccione el apoyo adicional requerido (reposabrazos, bandeja o soporte de pies).',
+              asset: 'animacion-otros-step1.gif',
+            },
+            {
+              text: 'Paso 2: Instale el accesorio en los anclajes correspondientes de la estructura del Sitting.',
+              asset: 'animacion-abductor.gif',
+            },
+            {
+              text: 'Paso 3: Ajuste y verifique la firmeza del apoyo, confirmando la comodidad del usuario.',
+              asset: 'animacion-otros-step3.gif',
+              subtitle: 'Ajuste Diferenciado',
+            },
+          ],
+          completa: [
+            {
+              text: 'Paso 1: Revise la configuración completa del Sitting e identifique todos los apoyos a instalar.',
+              asset: 'animacion-abductor-step1.gif',
+            },
+            {
+              text: 'Paso 2: Instale progresivamente cada componente: pelvis, tronco, abductor y cabeza.',
+              asset: 'animacion-abductor.gif',
+            },
+            {
+              text: 'Paso 3: Verifique la postura global: alineación, simetría y estabilidad del usuario.',
+              asset: 'animacion-abductor-step3.gif',
+              subtitle: 'Ajuste Simétrico',
+            },
+          ],
+        },
+      };
+
+      const productContext = parseProductContext();
+
+      /* Gif de respaldo por pieza: cada contexto usa su propio asset,
+         nunca se fuerza animacion-abductor.gif para otras piezas. */
+      const PIECE_FALLBACK = {
+        abductor: 'animacion-abductor.gif',
+        calzon: 'animacion-abductor.gif',
+        'cunas-tronco': 'animacion-abductor.gif',
+        'cuna-cabeza': 'animacion-cunas-cabeza.gif',
+        otros: 'animacion-abductor.gif',
+        completa: 'animacion-abductor.gif',
+      };
+      const FALLBACK_GIF = PIECE_FALLBACK[productContext.piece] || 'animacion-abductor.gif';
+
+      /* Selecciona los pasos del modelo/pieza. Si el modelo es S200 (o no
+         hay coincidencia), mapea a la guía verificada del abductor. */
+      const VISOR_STEPS =
+        (STEPS_CONFIGURATION_DATA[productContext.model] &&
+          STEPS_CONFIGURATION_DATA[productContext.model][productContext.piece]) ||
+        STEPS_CONFIGURATION_DATA.S200.abductor;
+
+      /* Insignia superior: "Modelo: S200 - Abductor" */
+      const pieceLabel = PIECE_LABELS[productContext.piece] || productContext.piece;
+      productBadge.textContent = 'Modelo: ' + productContext.model + ' - ' + pieceLabel;
+
+      let activeStepIndex = 0;
+      let videoTrack = null;
+      let flashOn = false;
+
+      /* Verifica cada asset de paso; usa el gif base si falta */
+      VISOR_STEPS.forEach(function (step) {
+        const probe = new Image();
+        probe.onerror = function () { step.asset = FALLBACK_GIF; };
+        probe.src = step.asset;
+      });
+
+      /* Fallback dinámico: si un gif no carga, se usa animacion-abductor.gif
+         para que el layout nunca se rompa durante la evaluación. */
+      guidingMask.addEventListener('error', function () {
+        if (guidingMask.getAttribute('src') !== FALLBACK_GIF) {
+          guidingMask.src = FALLBACK_GIF;
+        }
+      });
+
+      /* Muestra u oculta el subtítulo operativo (Ajuste Simétrico /
+         Ajuste Diferenciado) según el paso actual. */
+      function setSubtitle(sub) {
+        if (sub) {
+          instructionSubtitle.textContent = sub;
+          instructionSubtitle.classList.add('visible');
+        } else {
+          instructionSubtitle.textContent = '';
+          instructionSubtitle.classList.remove('visible');
+        }
+      }
+
+      /* Render inicial del primer paso según la pieza del contexto */
+      instructionText.textContent = VISOR_STEPS[0].text;
+      setSubtitle(VISOR_STEPS[0].subtitle);
+      guidingMask.src = VISOR_STEPS[0].asset;
+
+      /* ========================================
+         CAMBIO DE PASO
+         ======================================== */
+
+      function applyVisorStep(index) {
+        if (index === activeStepIndex || !VISOR_STEPS[index]) return;
+        activeStepIndex = index;
+
+        stepNav.querySelectorAll('.step-badge').forEach(function (badge) {
+          badge.classList.toggle('step-badge--active', Number(badge.dataset.step) === index);
+        });
+
+        /* Atenúa subtítulo + texto + máscara, intercambia y reaparece */
+        instructionSubtitle.classList.add('switching');
+        instructionText.classList.add('switching');
+        guidingMask.classList.add('switching');
+
+        setTimeout(function () {
+          instructionText.textContent = VISOR_STEPS[index].text;
+          setSubtitle(VISOR_STEPS[index].subtitle);
+          guidingMask.src = VISOR_STEPS[index].asset;
+          instructionSubtitle.classList.remove('switching');
+          instructionText.classList.remove('switching');
+          guidingMask.classList.remove('switching');
+        }, 200);
+      }
+
+      function onStepBadgeTap(e) {
+        const badge = e.target.closest('.step-badge');
+        if (!badge) return;
+        e.preventDefault();
+        applyVisorStep(Number(badge.dataset.step));
+      }
+
+      stepNav.addEventListener('touchstart', onStepBadgeTap, { passive: false });
+      stepNav.addEventListener('click', function (e) {
+        /* click en escritorio; touchstart ya cubre el móvil */
+        const badge = e.target.closest('.step-badge');
+        if (badge) applyVisorStep(Number(badge.dataset.step));
+      });
+
+      /* ========================================
+         TOAST CENTRAL TEMPORAL
+         ======================================== */
+
+      const centerToast = document.getElementById('center-toast');
+      let centerToastTimer = null;
+
+      function showCenterToast(message) {
+        centerToast.textContent = message;
+        centerToast.classList.add('visible');
+        clearTimeout(centerToastTimer);
+        centerToastTimer = setTimeout(function () {
+          centerToast.classList.remove('visible');
+        }, 2200);
+      }
+
+      /* ========================================
+         GESTOS: ARRASTRAR (PAN) + PELLIZCAR (ZOOM)
+         Manipulación natural de la máscara guía sobre el video.
+         ======================================== */
+
+      let maskPosX = 0;
+      let maskPosY = 0;
+      let maskScale = 1;
+      const MIN_SCALE = 0.4;
+      const MAX_SCALE = 4;
+
+      function applyMaskTransform() {
+        guidingMask.style.transform =
+          'translate(-50%, -50%) translate(' + maskPosX + 'px, ' + maskPosY + 'px) scale(' + maskScale + ')';
+      }
+
+      let isDragging = false;
+      let isPinching = false;
+      let dragStartX = 0;
+      let dragStartY = 0;
+      let startPosX = 0;
+      let startPosY = 0;
+      let pinchStartDist = 0;
+      let pinchStartScale = 1;
+
+      function distanceBetween(t1, t2) {
+        return Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
+      }
+
+      /* --- Gestos táctiles (móvil) --- */
+      guidingMask.addEventListener('touchstart', function (e) {
+        if (e.touches.length === 2) {
+          isPinching = true;
+          isDragging = false;
+          pinchStartDist = distanceBetween(e.touches[0], e.touches[1]);
+          pinchStartScale = maskScale;
+        } else if (e.touches.length === 1) {
+          isDragging = true;
+          isPinching = false;
+          dragStartX = e.touches[0].clientX;
+          dragStartY = e.touches[0].clientY;
+          startPosX = maskPosX;
+          startPosY = maskPosY;
+          guidingMask.classList.add('dragging');
+        }
+        e.preventDefault();
+      }, { passive: false });
+
+      window.addEventListener('touchmove', function (e) {
+        if (isPinching && e.touches.length === 2) {
+          const dist = distanceBetween(e.touches[0], e.touches[1]);
+          const next = pinchStartScale * (dist / pinchStartDist);
+          maskScale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, next));
+          applyMaskTransform();
+          e.preventDefault();
+        } else if (isDragging && e.touches.length === 1) {
+          maskPosX = startPosX + (e.touches[0].clientX - dragStartX);
+          maskPosY = startPosY + (e.touches[0].clientY - dragStartY);
+          applyMaskTransform();
+          e.preventDefault();
+        }
+      }, { passive: false });
+
+      window.addEventListener('touchend', function (e) {
+        if (e.touches.length === 0) {
+          isDragging = false;
+          isPinching = false;
+          guidingMask.classList.remove('dragging');
+        } else if (e.touches.length === 1) {
+          /* Terminó el pellizco: continúa el arrastre con el dedo restante */
+          isPinching = false;
+          isDragging = true;
+          dragStartX = e.touches[0].clientX;
+          dragStartY = e.touches[0].clientY;
+          startPosX = maskPosX;
+          startPosY = maskPosY;
+        }
+      });
+
+      /* --- Fallback de escritorio: arrastre con ratón --- */
+      guidingMask.addEventListener('mousedown', function (e) {
+        isDragging = true;
+        dragStartX = e.clientX;
+        dragStartY = e.clientY;
+        startPosX = maskPosX;
+        startPosY = maskPosY;
+        guidingMask.classList.add('dragging');
+        e.preventDefault();
+      });
+
+      window.addEventListener('mousemove', function (e) {
+        if (!isDragging) return;
+        maskPosX = startPosX + (e.clientX - dragStartX);
+        maskPosY = startPosY + (e.clientY - dragStartY);
+        applyMaskTransform();
+      });
+
+      window.addEventListener('mouseup', function () {
+        if (!isDragging) return;
+        isDragging = false;
+        guidingMask.classList.remove('dragging');
+      });
+
+      /* --- Fallback de escritorio: zoom con la rueda del ratón --- */
+      guidingMask.addEventListener('wheel', function (e) {
+        e.preventDefault();
+        const delta = e.deltaY < 0 ? 0.08 : -0.08;
+        maskScale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, maskScale + delta));
+        applyMaskTransform();
+      }, { passive: false });
+
+      /* ========================================
+         CAMERA
+         ======================================== */
+
+      async function startCamera() {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({
+            video: { facingMode: 'environment' },
+            audio: false,
+          });
+          videoElement.srcObject = stream;
+          videoTrack = stream.getVideoTracks()[0] || null;
+        } catch (error) {
+          console.error('Cámara no disponible:', error);
+          cameraError.classList.add('visible');
+        }
+      }
+
+      /* ========================================
+         LINTERNA / TORCH (HARDWARE)
+         Consulta el MediaStreamTrack activo de la cámara trasera y
+         alterna la restricción nativa de hardware "torch".
+         ======================================== */
+
+      const flashBtn = document.getElementById('btn-flash');
+
+      flashBtn.addEventListener('click', async function () {
+        if (!videoTrack) {
+          showCenterToast('Cámara no disponible para la linterna.');
+          return;
+        }
+
+        const capabilities = videoTrack.getCapabilities ? videoTrack.getCapabilities() : {};
+        if (!capabilities.torch) {
+          showCenterToast('Tu dispositivo no permite activar la linterna.');
+          return;
+        }
+
+        flashOn = !flashOn;
+        try {
+          await videoTrack.applyConstraints({ advanced: [{ torch: flashOn }] });
+          /* Feedback UI inmediato del estado físico del torch */
+          flashBtn.classList.toggle('icon-btn--flash-on', flashOn);
+          flashBtn.setAttribute('aria-label', flashOn ? 'Apagar linterna' : 'Activar linterna');
+          showCenterToast(flashOn ? 'Linterna encendida' : 'Linterna apagada');
+        } catch (err) {
+          console.warn('Linterna no disponible:', err);
+          flashOn = false;
+          flashBtn.classList.remove('icon-btn--flash-on');
+          showCenterToast('No se pudo activar la linterna.');
+        }
+      });
+
+      /* ========================================
+         OBTURADOR — CAPTURA Y DESCARGA (.png)
+         ======================================== */
+
+      const screenFlash = document.getElementById('screen-flash');
+
+      function triggerScreenFlash() {
+        screenFlash.classList.add('active');
+        setTimeout(function () { screenFlash.classList.remove('active'); }, 150);
+      }
+
+      document.getElementById('btn-shutter').addEventListener('click', function () {
+        /* Destello visual inmediato que simula la captura de cámara */
+        triggerScreenFlash();
+
+        if (!videoElement.videoWidth) {
+          showCenterToast('La cámara aún no está lista para capturar.');
+          return;
+        }
+
+        const canvas = document.createElement('canvas');
+        canvas.width = videoElement.videoWidth;
+        canvas.height = videoElement.videoHeight;
+        canvas.getContext('2d').drawImage(videoElement, 0, 0);
+
+        const link = document.createElement('a');
+        link.download = 'doi-' + productContext.model + '-' + productContext.piece + '-paso-' + (activeStepIndex + 1) + '.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+
+        showCenterToast('¡Configuración guardada! Foto descargada.');
+      });
+
+      /* ========================================
+         BACK NAVIGATION
+         ======================================== */
+
+      document.getElementById('btn-back').addEventListener('click', function () {
+        if (history.length > 1) {
+          history.back();
+        } else {
+          window.close();
+        }
+      });
+
+      startCamera();
+    })();
+  </script>
+</body>
+</html>
