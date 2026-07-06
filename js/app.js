@@ -671,7 +671,13 @@
       if (e.target.id === 'config-modal') closeConfigModal();
     });
 
-    document.getElementById('config-complete').addEventListener('click', () => {
+    document.getElementById('config-complete').addEventListener('click', (e) => {
+      const btn = e.currentTarget;
+      /* "Configuración completa" bloqueada ("Pronto") no navega */
+      if (btn.disabled || btn.classList.contains('config-card--locked')) {
+        console.log('[doi] "Configuración completa" bloqueada (Pronto), navegación cancelada');
+        return;
+      }
       launchARView('completa');
     });
 
