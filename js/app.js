@@ -190,7 +190,7 @@
         <div class="product-card__actions">
           ${product.active
             ? `<button class="btn-pill btn-pill--active btn-pill--small" data-action="view-product" data-id="${product.id}">VER</button>`
-            : `<button class="btn-pill btn-pill--disabled btn-pill--small" disabled>COMING SOON</button>`
+            : `<button class="btn-pill btn-pill--disabled btn-pill--small" disabled>Pronto</button>`
           }
         </div>
       `;
@@ -288,7 +288,7 @@
         <div class="product-card__actions">
           ${product.active
             ? `<button class="btn-pill btn-pill--active btn-pill--small" data-action="search-view-product" data-id="${product.id}">VER</button>`
-            : `<button class="btn-pill btn-pill--disabled btn-pill--small" disabled>COMING SOON</button>`
+            : `<button class="btn-pill btn-pill--disabled btn-pill--small" disabled>Pronto</button>`
           }
         </div>
       `;
@@ -677,6 +677,11 @@
 
     document.querySelectorAll('.config-badge').forEach((badge) => {
       badge.addEventListener('click', () => {
+        /* Piezas bloqueadas ("Pronto") no navegan */
+        if (badge.disabled || badge.classList.contains('config-badge--locked')) {
+          console.log('[doi] Pieza bloqueada (Pronto), navegación cancelada:', badge.dataset.piece);
+          return;
+        }
         launchARView(badge.dataset.piece);
       });
     });

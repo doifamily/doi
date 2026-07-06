@@ -1254,6 +1254,33 @@ button {
   transform: scale(0.97);
 }
 
+/* Piezas bloqueadas (aún no disponibles) */
+.config-badge--locked {
+  pointer-events: none;
+  opacity: 0.6;
+  cursor: not-allowed;
+  gap: 6px;
+}
+
+.config-badge--locked:hover {
+  background: var(--color-white);
+  border-color: #c5dfe9;
+  color: #2a6e8a;
+  transform: none;
+}
+
+.config-badge__status {
+  display: inline-block;
+  font-size: 0.66rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--color-primary);
+  background: rgba(250, 70, 21, 0.12);
+  border-radius: 999px;
+  padding: 2px 7px;
+}
+
 /* ========================================
    TOAST NOTIFICATIONS
    ======================================== */
